@@ -1,7 +1,6 @@
 function love.load()
-whale = love.graphics.newImage("resources/images/whale.png")
 end
 
 function love.draw()
-love.graphics.draw(whale, 20, 20)
+love.graphics.circle("fill",100,100,50,100)
 end
