@@ -1,21 +1,25 @@
 require("AnAL")
 
 function love.load()
- hero = {} -- new table for the hero
- hero.x = 300    -- x,y coordinates of the hero
+ 
+ -- Estos son los valores de mi heroe.
+ hero = {} -- Creamos una tabla como estructura
+ hero.x = 300    -- x,y establecemos las coordenadas
  hero.y = 450
  hero.speed = 100
  
-enemigo = {}
-enemigo.x = 400
-enemigo.y = 550
-enemigo.speed = 100
 --Arma del heroe.
 espada = {}
 espada.ataque = 100
 espada.tipo = "Espada Hielo"
 
+arco = {}
+arco.ataque = 200
+arco.tipo = "Arco de luz"
+
+-- Equipamos el arma al heroe.
 hero.equipada = espada
+-- Inicialmente el arma esta desenfundada.
 desenfundada = false
 --Banda sonora
 temazo = love.audio.newSource("resources/music/Deeper.ogg")
@@ -63,7 +67,10 @@ function love.update(dt)
  elseif love.keyboard.isDown("up") then
    hero.y = hero.y - hero.speed*dt
    animacionArriba()
-   
+ elseif love.keyboard.isDown("2") then
+   hero.equipada = arco
+ elseif love.keyboard.isDown("1") then
+   hero.equipada = espada
  end
  
  --Modo ataque
