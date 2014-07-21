@@ -62,9 +62,8 @@ function love.update(dt)
    hero.y = hero.y + hero.speed*dt
  elseif love.keyboard.isDown("up") then
    hero.y = hero.y - hero.speed*dt
-   --animacionArriba()
+   animacionArriba()
    
-   anim:update(dt)
  end
  
  --Modo ataque
@@ -88,6 +87,5 @@ function love.draw()
 end
 
 love.graphics.draw(tilesetImage,Animacion,hero.x,hero.y)
-anim:draw(200,200)
 
 end
