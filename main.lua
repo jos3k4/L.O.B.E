@@ -38,7 +38,12 @@ tilesetImage = love.graphics.newImage("resources/images/human_base.png")
   AnimacionArriba = {}
   AnimacionArriba[0] = love.graphics.newQuad(0,  0, tileW, tileH, tilesetW, tilesetH)
   AnimacionArriba[1] = love.graphics.newQuad(16,  0, tileW, tileH, tilesetW, tilesetH)
-  AnimacionArriba[2] = love.graphics.newQuad(32,  0, tileW, tileH, tilesetW, tilesetH)  
+  AnimacionArriba[2] = love.graphics.newQuad(32,  0, tileW, tileH, tilesetW, tilesetH)
+  
+  AnimacionAbajo = {}
+  AnimacionAbajo[0] = love.graphics.newQuad(0,  36, tileW, tileH, tilesetW, tilesetH)
+  AnimacionAbajo[1] = love.graphics.newQuad(16,  36, tileW, tileH, tilesetW, tilesetH)
+  AnimacionAbajo[2] = love.graphics.newQuad(32,  36, tileW, tileH, tilesetW, tilesetH)
   
   Animacion = AnimacionArriba[0]
   
@@ -54,7 +59,17 @@ function animacionArriba()
 Animacion = AnimacionArriba[i]
   
   i = i + 1
+end 
+
+
+function animacionAbajo()
+  if i == 2 then
+      i = 0
+  end  
+
+Animacion = AnimacionAbajo[i]
   
+  i = i + 1
 end 
 
 function love.update(dt)
@@ -64,6 +79,7 @@ function love.update(dt)
    hero.x = hero.x + hero.speed*dt
  elseif love.keyboard.isDown("down") then
    hero.y = hero.y + hero.speed*dt
+   animacionAbajo()
  elseif love.keyboard.isDown("up") then
    hero.y = hero.y - hero.speed*dt
    animacionArriba()
@@ -92,7 +108,8 @@ function love.draw()
  if desenfundada then
  love.graphics.print(hero.equipada.tipo, 100, 100)
 end
-
+--Transparencia al color de la escena.
+love.graphics.setColor(255, 255, 255, 255); 
 love.graphics.draw(tilesetImage,Animacion,hero.x,hero.y)
 
 end
