@@ -1,34 +1,43 @@
-require("AnAL")
-
-function love.load()
- 
- -- Estos son los valores de mi heroe.
- hero = {} -- Creamos una tabla como estructura
+function generaHeroe()
+ -- Creamos una tabla como estructura
  hero.x = 300    -- x,y establecemos las coordenadas
  hero.y = 450
  hero.speed = 100
- 
+ hero.life = 20
+ hero.attack = 4
+ hero.defense = 2
+return hero
+end
+
+function forjarArma(a,b)
+arma.ataque = a
+arma.tipo = b
+
+return arma
+end
+
+-- Inicializacion del Juego.
+function love.load()
+-- Creo mi tabla heroe vacio.
+hero = {}
+--De esta forma voy a crear un heroe generico.
+-- En un futuro lo ideal seria pasarle los parametros para asi generar en un momento dado el heroe que quiera.
+hero = generaHeroe()
 --Arma del heroe.
-espada = {}
-espada.ataque = 100
-espada.tipo = "Espada Hielo"
-
-arco = {}
-arco.ataque = 200
-arco.tipo = "Arco de luz"
-
+arma = {}
+arma = forjarArma(100,"Espada de fuego")
 -- Equipamos el arma al heroe.
-hero.equipada = espada
+hero.equipada = arma
 -- Inicialmente el arma esta desenfundada.
 desenfundada = false
---Banda sonora
+--Vamos a cargar los temas que pueden sonar en el juego.
 temazo = love.audio.newSource("resources/music/Deeper.ogg")
 combate = love.audio.newSource("resources/music/AssaultOnMistCastle.ogg")
+--Reproducimos el tema base.
 love.audio.play(temazo)
 
-
+valor = ""
 --Descompongo el Spritesheet en fragmentos.
-
 tilesetImage = love.graphics.newImage("resources/images/human_base.png")
 
   local tileW, tileH = 16,20
@@ -55,22 +64,10 @@ function animacionArriba()
   if i == 2 then
       i = 0
   end  
-
 Animacion = AnimacionArriba[i]
-  
   i = i + 1
 end 
 
-
-function animacionAbajo()
-  if i == 2 then
-      i = 0
-  end  
-
-Animacion = AnimacionAbajo[i]
-  
-  i = i + 1
-end 
 
 function love.update(dt)
   if love.keyboard.isDown("left") then
@@ -83,10 +80,6 @@ function love.update(dt)
  elseif love.keyboard.isDown("up") then
    hero.y = hero.y - hero.speed*dt
    animacionArriba()
- elseif love.keyboard.isDown("2") then
-   hero.equipada = arco
- elseif love.keyboard.isDown("1") then
-   hero.equipada = espada
  end
  
  --Modo ataque
@@ -111,5 +104,7 @@ end
 --Transparencia al color de la escena.
 love.graphics.setColor(255, 255, 255, 255); 
 love.graphics.draw(tilesetImage,Animacion,hero.x,hero.y)
+
+ love.graphics.print(valor, 200, 200)
 
 end
