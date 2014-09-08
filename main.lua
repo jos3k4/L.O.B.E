@@ -19,7 +19,8 @@ end
 -- Inicializacion del Juego.
 function love.load()
 personajes = {}
-
+-- Tal como he creado el juego,es necesaria una tabla para cada nuevo heroe que generemos
+-- En la funcion generaHeroe el primer parametro sera esta tabla.
 heroe = {}
 antiheroe = {}
 --De esta forma voy a crear un heroe generico.
@@ -64,16 +65,17 @@ tilesetImage = love.graphics.newImage("resources/images/human_base.png")
   AnimacionAbajo[1] = love.graphics.newQuad(16,  36, tileW, tileH, tilesetW, tilesetH)
   AnimacionAbajo[2] = love.graphics.newQuad(32,  36, tileW, tileH, tilesetW, tilesetH)
   
-  hero.animacion = AnimacionArriba[0]
-  antihero.animacion = AnimacionAbajo[0]
+  personajes[0].animacion = AnimacionArriba[0]
+  personajes[1].animacion = AnimacionAbajo[0]
+  --antihero.animacion = AnimacionAbajo[0]
  
 end
 
-function animacionArriba()
+function animacionArriba(heroe)
   if i == 2 then
       i = 0
   end  
-hero.animacion = AnimacionArriba[i]
+heroe.animacion = AnimacionArriba[i]
   i = i + 1
 end 
 
@@ -88,7 +90,7 @@ function love.update(dt)
    --animacionAbajo()
  elseif love.keyboard.isDown("up") then
    personajes[0].y = personajes[0].y - personajes[0].speed*dt
-   animacionArriba()
+   animacionArriba(personajes[0])
  end
  
  --Modo ataque
@@ -113,15 +115,9 @@ end
 --Transparencia al color de la escena.
 love.graphics.setColor(255, 255, 255, 255); 
 
---print(personajes[0].x)
---for i=0,1,1 do
---  love.graphics.draw(tilesetImage,hero.animacion,personajes[i].x,personajes[i].y)
---end
-
-
-love.graphics.draw(tilesetImage,personajes[0].animacion,personajes[0].x,personajes[0].y)
-love.graphics.draw(tilesetImage,personajes[1].animacion,personajes[1].x,personajes[1].y)
-love.graphics.print(personajes[0].x, 100, 100)
-love.graphics.print(personajes[1].x, 100, 130)
+--Voy mostrando las posiciones correspondientes a cada uno de los personajes.
+for i=0,1,1 do
+  love.graphics.draw(tilesetImage,personajes[i].animacion,personajes[i].x,personajes[i].y)
+end
 
 end
