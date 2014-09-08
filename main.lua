@@ -1,3 +1,6 @@
+require "Utils"
+
+
 function generaHeroe(h,posx,posy,spd,lf,atck,def)
  -- Creamos una tabla como estructura
  h = {}
@@ -69,6 +72,9 @@ tilesetImage = love.graphics.newImage("resources/images/human_base.png")
   personajes[1].animacion = AnimacionAbajo[0]
   --antihero.animacion = AnimacionAbajo[0]
  
+ num = numeroAleatorio(1,12)
+ a = string.format("%s",num)
+
 end
 
 function animacionArriba(heroe)
@@ -119,5 +125,7 @@ love.graphics.setColor(255, 255, 255, 255);
 for i=0,1,1 do
   love.graphics.draw(tilesetImage,personajes[i].animacion,personajes[i].x,personajes[i].y)
 end
+
+love.graphics.print(a, 400, 300)
 
 end
