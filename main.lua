@@ -1,4 +1,5 @@
 require "Utils"
+require "controlador"
 
 
 function generaHeroe(h,posx,posy,spd,lf,atck,def)
@@ -71,9 +72,10 @@ tilesetImage = love.graphics.newImage("resources/images/human_base.png")
   personajes[0].animacion = AnimacionArriba[0]
   personajes[1].animacion = AnimacionAbajo[0]
   --antihero.animacion = AnimacionAbajo[0]
- 
- num = numeroAleatorio(1,12)
- a = string.format("%s",num)
+
+
+a = string.format("%s",numeroAleatorio(1,12))
+
 
 end
 
@@ -87,17 +89,8 @@ end
 
 
 function love.update(dt)
-  if love.keyboard.isDown("left") then
-   personajes[0].x = personajes[0].x - personajes[0].speed*dt
- elseif love.keyboard.isDown("right") then
-   personajes[0].x = personajes[0].x + personajes[0].speed*dt
- elseif love.keyboard.isDown("down") then
-   personajes[0].y = personajes[0].y + personajes[0].speed*dt
-   --animacionAbajo()
- elseif love.keyboard.isDown("up") then
-   personajes[0].y = personajes[0].y - personajes[0].speed*dt
-   animacionArriba(personajes[0])
- end
+  
+  controlarPersonaje(dt)
  
  --Modo ataque
  if love.keyboard.isDown("c") then
