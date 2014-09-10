@@ -36,13 +36,10 @@ function love.update(dt)
 end
 
 function love.draw()
-   -- let's draw some ground
+   -- Vamos a dibujar un campo.
  love.graphics.setColor(0,255,0,255)
  love.graphics.rectangle("fill", 0, 465, 800, 150)
  
-if hero.desenfundada then
- love.graphics.print(hero.equipada.tipo, 100, 100)
-end
 --Transparencia al color de la escena.
 love.graphics.setColor(255, 255, 255, 255); 
 
