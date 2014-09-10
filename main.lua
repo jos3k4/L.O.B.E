@@ -17,6 +17,11 @@ antihero = Heroe.new(200,200,100,20,4,2)
 personajes[0] = hero
 personajes[1] = antihero
 
+hero.setMovimientoArriba("up")
+hero.setMovimientoAbajo("down")
+hero.setMovimientoDerecha("right")
+hero.setMovimientoIzquierda("left")
+
 --Vamos a cargar los temas que pueden sonar en el juego.
 temazo = love.audio.newSource("resources/music/Deeper.ogg")
 combate = love.audio.newSource("resources/music/AssaultOnMistCastle.ogg")
@@ -26,15 +31,14 @@ combate = love.audio.newSource("resources/music/AssaultOnMistCastle.ogg")
 end
 
 function love.update(dt)
-  controlarPersonaje(dt)
   antihero.instanciaControles(dt)
+  hero.instanciaControles(dt)
 end
 
 function love.draw()
    -- let's draw some ground
  love.graphics.setColor(0,255,0,255)
  love.graphics.rectangle("fill", 0, 465, 800, 150)
-
  
 if hero.desenfundada then
  love.graphics.print(hero.equipada.tipo, 100, 100)

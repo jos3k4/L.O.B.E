@@ -58,6 +58,22 @@
                  end
               end
               
+            self.setMovimientoArriba = function(k)
+              CONTROL_MOV_ARRIBA = k
+            end
+            
+            self.setMovimientoDerecha = function(k)
+              CONTROL_MOV_DERECHA = k
+            end
+            
+            self.setMovimientoAbajo = function(k)
+              CONTROL_MOV_ABAJO = k
+            end
+            
+            self.setMovimientoIzquierda = function(k)
+              CONTROL_MOV_IZQUIERDA = k
+            end
+              
               --[[
                --Modo ataque
  if love.keyboard.isDown("c") then
