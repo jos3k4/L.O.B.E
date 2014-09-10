@@ -9,6 +9,6 @@ function controlarPersonaje(dt)
    --animacionAbajo()
  elseif love.keyboard.isDown("up") then
    personajes[0].y = personajes[0].y - personajes[0].speed*dt
-   animacionArriba(personajes[0])
+  -- animacionArriba(personajes[0])
  end
 end

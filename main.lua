@@ -1,24 +1,6 @@
 require "Utils"
 require "controlador"
-
-
-function generaHeroe(h,posx,posy,spd,lf,atck,def)
- -- Creamos una tabla como estructura
- h = {}
- h.x = posx    -- x,y establecemos las coordenadas
- h.y = posy
- h.speed = spd
- h.life = lf
- h.attack = atck
- h.defense = def
-return h
-end
-
-function forjarArma(a,b)
-arma.ataque = a
-arma.tipo = b
-return arma
-end
+require "protagonista"
 
 -- Inicializacion del Juego.
 function love.load()
@@ -27,79 +9,25 @@ personajes = {}
 -- En la funcion generaHeroe el primer parametro sera esta tabla.
 heroe = {}
 antiheroe = {}
+
 --De esta forma voy a crear un heroe generico.
--- En un futuro lo ideal seria pasarle los parametros para asi generar en un momento dado el heroe que quiera.
-hero = generaHeroe(hero,450,300,100,20,4,2)
-antihero = generaHeroe(antiheroe,200,200,100,10,1,6)
+hero = Heroe.new(450,300,100,20,4,2)
+antihero = Heroe.new(200,200,100,20,4,2)
 
 personajes[0] = hero
 personajes[1] = antihero
-
---Arma del heroe.
-arma = {}
-arma = forjarArma(100,"Espada de fuego")
-
--- Equipamos el arma al heroe.
-hero.equipada = arma
-
--- Inicialmente el arma esta desenfundada.
-hero.desenfundada = false
 
 --Vamos a cargar los temas que pueden sonar en el juego.
 temazo = love.audio.newSource("resources/music/Deeper.ogg")
 combate = love.audio.newSource("resources/music/AssaultOnMistCastle.ogg")
 --Reproducimos el tema base.
 --love.audio.play(temazo)
-
---Descompongo el Spritesheet en fragmentos.
-tilesetImage = love.graphics.newImage("resources/images/human_base.png")
-
-
-  local tileW, tileH = 16,20
-  local tilesetW, tilesetH = tilesetImage:getWidth(), tilesetImage:getHeight()
-   i = 0
-  
-  AnimacionArriba = {}
-  AnimacionArriba[0] = love.graphics.newQuad(0,  0, tileW, tileH, tilesetW, tilesetH)
-  AnimacionArriba[1] = love.graphics.newQuad(16,  0, tileW, tileH, tilesetW, tilesetH)
-  AnimacionArriba[2] = love.graphics.newQuad(32,  0, tileW, tileH, tilesetW, tilesetH)
-  
-  AnimacionAbajo = {}
-  AnimacionAbajo[0] = love.graphics.newQuad(0,  36, tileW, tileH, tilesetW, tilesetH)
-  AnimacionAbajo[1] = love.graphics.newQuad(16,  36, tileW, tileH, tilesetW, tilesetH)
-  AnimacionAbajo[2] = love.graphics.newQuad(32,  36, tileW, tileH, tilesetW, tilesetH)
-  
-  personajes[0].animacion = AnimacionArriba[0]
-  personajes[1].animacion = AnimacionAbajo[0]
-  --antihero.animacion = AnimacionAbajo[0]
-
-
-a = string.format("%s",numeroAleatorio(1,12))
-
-
+--a = string.format("%s",numeroAleatorio(1,12))
 end
 
-function animacionArriba(heroe)
-  if i == 2 then
-      i = 0
-  end  
-heroe.animacion = AnimacionArriba[i]
-  i = i + 1
-end 
-
-
 function love.update(dt)
-  
   controlarPersonaje(dt)
- 
- --Modo ataque
- if love.keyboard.isDown("c") then
-   love.audio.stop(temazo)
-   love.audio.play(combate)
-   love.graphics.setColor(255,0,0,255)
-   hero.desenfundada = true
- end
- 
+  antihero.instanciaControles(dt)
 end
 
 function love.draw()
@@ -119,6 +47,5 @@ for i=0,1,1 do
   love.graphics.draw(tilesetImage,personajes[i].animacion,personajes[i].x,personajes[i].y)
 end
 
-love.graphics.print(a, 400, 300)
 
 end
