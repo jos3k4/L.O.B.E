@@ -1,5 +1,4 @@
 require "Utils"
-require "controlador"
 require "protagonista"
 
 -- Inicializacion del Juego.
