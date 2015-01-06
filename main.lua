@@ -1,7 +1,9 @@
 require "Utils"
 require "protagonista"
 
--- Inicializacion del Juego.
+
+ -- Inicializacion del Juego.
+
 function love.load()
 personajes = {}
 -- Tal como he creado el juego,es necesaria una tabla para cada nuevo heroe que generemos
@@ -10,8 +12,8 @@ heroe = {}
 antiheroe = {}
 
 --De esta forma voy a crear un heroe generico.
-hero = Heroe.new(450,300,100,20,4,2)
-antihero = Heroe.new(200,200,100,20,4,2)
+hero = Heroe.new(450,300,16,20,4,2)
+antihero = Heroe.new(200,200,16,20,4,2)
 
 personajes[0] = hero
 personajes[1] = antihero

@@ -17,10 +17,10 @@
         
         -- Animaciones del personaje.
         
-        tilesetImage = love.graphics.newImage("resources/images/human_base.png")
+        tilesetImage = love.graphics.newImage("resources/images/characters.png")
 
 
-        local tileW, tileH = 16,20
+        local tileW, tileH = 16,16
         local tilesetW, tilesetH = tilesetImage:getWidth(), tilesetImage:getHeight()
         i = 0
   
@@ -30,7 +30,7 @@
         animacionArriba[2] = love.graphics.newQuad(32,  0, tileW, tileH, tilesetW, tilesetH)
   
         animacionAbajo = {}
-        animacionAbajo[0] = love.graphics.newQuad(0,  36, tileW, tileH, tilesetW, tilesetH)
+        animacionAbajo[0] = love.graphics.newQuad(0,  0, tileW, tileH, tilesetW, tilesetH)
         animacionAbajo[1] = love.graphics.newQuad(16,  36, tileW, tileH, tilesetW, tilesetH)
         animacionAbajo[2] = love.graphics.newQuad(32,  36, tileW, tileH, tilesetW, tilesetH)
 
@@ -46,15 +46,17 @@
 
               self.instanciaControles = function(dt)
                  if love.keyboard.isDown(CONTROL_MOV_IZQUIERDA) then
-                   self.x = self.x - self.speed*dt
+                   self.x = self.x - self.speed
+                   love.timer.sleep(0.3)
                  elseif love.keyboard.isDown(CONTROL_MOV_DERECHA) then
-                   self.x = self.x + self.speed*dt
+                   self.x = self.x + self.speed
+                   love.timer.sleep(0.3)
                  elseif love.keyboard.isDown(CONTROL_MOV_ABAJO) then
-                   self.y = self.y + self.speed*dt
-                   self.animAbajo()
+                   self.y = self.y + self.speed
+                   love.timer.sleep(0.3)
                  elseif love.keyboard.isDown(CONTROL_MOV_ARRIBA) then
-                   self.y = self.y - self.speed*dt
-                   self.animArriba()
+                   self.y = self.y - self.speed
+                   love.timer.sleep(0.3)
                  end
               end
               
